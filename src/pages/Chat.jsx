@@ -2,13 +2,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import socketIO from "socket.io-client";
-import { Button, TextInput } from "flowbite-react";
+import { Button, Spinner, TextInput } from "flowbite-react";
 import { BiPaperPlane } from "react-icons/bi";
 
 const SERVER_HOST = import.meta.env.VITE_SERVER_HOST;
 let socket;
 if (!socket) {
-  socket = socketIO(SERVER_HOST, { transports: ["websocket"] });
+  socket = socketIO(SERVER_HOST, {
+    transports: ["websocket"],
+    withCredentials: true,
+  });
 }
 
 const Chat = () => {
@@ -18,9 +21,12 @@ const Chat = () => {
   const [rooms, setRooms] = useState([]);
   const [error, setError] = useState(null);
   const [newRoom, setNewRoom] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchRooms = async () => {
+      setLoading(true);
+
       try {
         const response = await axios.get(`${SERVER_HOST}/admin/chat`, {
           withCredentials: true,
@@ -29,8 +35,10 @@ const Chat = () => {
         if (response.status === 200) {
           const data = await response.data;
           setRooms(data.chats);
+          setLoading(false);
         }
       } catch (error) {
+        setLoading(false);
         console.log(error);
         if (error.response.status === 401) {
           window.location.reload();
@@ -61,7 +69,8 @@ const Chat = () => {
     }
   }, [messages]);
 
-  const handleKeyPress = (event) => { //Listen for Enter key to send message
+  const handleKeyPress = (event) => {
+    //Listen for Enter key to send message
     if (event.key === "Enter") {
       sendMsg();
     }
@@ -70,7 +79,8 @@ const Chat = () => {
   // SocketIO events emit functions //
 
   const joinRoom = (roomId) => {
-    socket.emit("joinRoom", { // emit joinRoom event
+    socket.emit("joinRoom", {
+      // emit joinRoom event
       roomId,
       msg: { message: "Staff has joined the room.", from: "system" }, // system message to noti when the staff is joined
     });
@@ -88,12 +98,14 @@ const Chat = () => {
   const sendMsg = () => {
     if (!inputMessage) return; // if input message is empty, return
 
-    if (inputMessage.trim() === "/end") { // if input message is /end, emit endChat event
+    if (inputMessage.trim() === "/end") {
+      // if input message is /end, emit endChat event
       setInputMessage("");
       return socket.emit("endChat", roomId);
     }
 
-    socket.emit("sendMsg", { // emit sendMsg event
+    socket.emit("sendMsg", {
+      // emit sendMsg event
       roomId,
       msg: { message: inputMessage, from: "admin" },
     });
@@ -129,26 +141,32 @@ const Chat = () => {
       <div className="col-span-3">
         <h1 className="text-2xl font-bold text-slate-500">Chat rooms :</h1>
         <div className=" max-h-full">
-          <ul className="roomsList overflow-scroll max-h-[70vh] overflow-y-hidden overflow-x-hidden">
-            {rooms.map((room) => {
-              return (
-                <li
-                  key={room._id}
-                  onClick={() => selectRoom(room.roomId)}
-                  className={`${
-                    roomId === room.roomId ? "bg-slate-200" : ""
-                  } text-xs px-2 py-3 hover:cursor-pointer hover:bg-slate-100 border-b-2`}
-                >
-                  <p className="text-slate-700 font-bold ">
-                    Room ID:{" "}
-                    <span className="text-slate-500 text-xs">
-                      {room.roomId}
-                    </span>
-                  </p>
-                </li>
-              );
-            })}
-          </ul>
+          {loading ? (
+            <div className="h-full flex">
+              <Spinner color="success" className="mr-2" /> <span>Loading rooms ...</span>
+            </div>
+          ) : (
+            <ul className="roomsList overflow-scroll max-h-[70vh] overflow-y-hidden overflow-x-hidden">
+              {rooms.map((room) => {
+                return (
+                  <li
+                    key={room._id}
+                    onClick={() => selectRoom(room.roomId)}
+                    className={`${
+                      roomId === room.roomId ? "bg-slate-200" : ""
+                    } text-xs px-2 py-3 hover:cursor-pointer hover:bg-slate-100 border-b-2`}
+                  >
+                    <p className="text-slate-700 font-bold ">
+                      Room ID:{" "}
+                      <span className="text-slate-500 text-xs">
+                        {room.roomId}
+                      </span>
+                    </p>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </div>
       </div>
       <div className="col-span-9 px-2">

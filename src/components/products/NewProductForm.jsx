@@ -1,11 +1,15 @@
 import axios from "axios";
-import { Alert, Button, FileInput, Label, TextInput } from "flowbite-react";
+import { Alert, Button, FileInput, Label, Spinner, TextInput } from "flowbite-react";
 import { useState } from "react";
+import { HiCheckCircle } from "react-icons/hi";
+import { HiArrowUturnLeft } from "react-icons/hi2";
 import { PiPlusCircle } from "react-icons/pi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const NewProductForm = () => {
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [form, setForm] = useState({
     name: "",
     price: "",
@@ -24,7 +28,6 @@ const NewProductForm = () => {
   };
 
   const handleFileChange = (e) => {
-    console.log(e.target.files);
     setForm({
       ...form,
       [e.target.name]: e.target.files,
@@ -36,7 +39,7 @@ const NewProductForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form.images);
+    setLoading(true);
     if (form.images.length < 5) {
       setError("Please select at least 5 images");
       return;
@@ -67,11 +70,15 @@ const NewProductForm = () => {
         }
       );
 
-      if (response.status === 200) {
-        navigate("/products");
+      console.log(response)
+
+      if (response.status === 201) {
+        setSuccess(true);
+        setLoading(false);
       }
 
     } catch (error) {
+      setLoading(false);
       console.log(error);
       if(error.response.status === 401) {
         navigate("/login");
@@ -83,9 +90,24 @@ const NewProductForm = () => {
       }
     }
   };
+
+  if(success) {
+    return (
+      <div>
+        <div className="p-3 flex items-center gap-4">
+          <HiCheckCircle size={40} color="green" />
+          <h1 className="text-2xl font-bold">Success added new Product</h1>
+        </div>
+        <Link to={"/products"}>
+        <Button className="mx-5"> <HiArrowUturnLeft className="mr-2"/>  Back to products page</Button>
+        </Link>
+      </div>
+    )
+  }
+
   return (
     <div className="p-3">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} >
         <div className="mb-6">
           <Label htmlFor="name">Product&apos;s Name: </Label>
           <TextInput
@@ -95,6 +117,7 @@ const NewProductForm = () => {
             name="name"
             required
             onChange={handleFieldChange}
+            disabled={loading}
           />
         </div>
         <div className="mb-6">
@@ -106,6 +129,7 @@ const NewProductForm = () => {
             name="category"
             required
             onChange={handleFieldChange}
+            disabled={loading}
           />
         </div>
         <div className="mb-6">
@@ -117,6 +141,7 @@ const NewProductForm = () => {
             name="price"
             required
             onChange={handleFieldChange}
+            disabled={loading}
           />
         </div>
         <div className="mb-6">
@@ -128,6 +153,7 @@ const NewProductForm = () => {
             name="long_desc"
             required
             onChange={handleFieldChange}
+            disabled={loading}
           />
         </div>
         <div className="mb-6">
@@ -139,6 +165,7 @@ const NewProductForm = () => {
             name="short_desc"
             required
             onChange={handleFieldChange}
+            disabled={loading}
           />
         </div>
         <div className="mb-6">
@@ -150,6 +177,7 @@ const NewProductForm = () => {
             name="stock"
             required
             onChange={handleFieldChange}
+            disabled={loading}
           />
         </div>
         <div>
@@ -159,11 +187,14 @@ const NewProductForm = () => {
             name="images"
             multiple
             onChange={handleFileChange}
+            disabled={loading}
           />
         </div>
         <div className="flex justify-between items-center mt-20">
           <Button color="success" type="submit">
-            <PiPlusCircle className="w-5 h-5 mr-2" /> Add product
+            <div className="flex items-center">{
+              loading ? <Spinner size="sm" color="success" className="mr-2" /> :<PiPlusCircle className="w-5 h-5 mr-2" />
+            } Add product</div>
           </Button>
           {error && (
             <Alert color="failure" onDismiss={() => setError(null)}>
