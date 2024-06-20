@@ -143,7 +143,8 @@ const Chat = () => {
         <div className=" max-h-full">
           {loading ? (
             <div className="h-full flex">
-              <Spinner color="success" className="mr-2" /> <span>Loading rooms ...</span>
+              <Spinner color="success" className="mr-2" />{" "}
+              <span>Loading rooms ...</span>
             </div>
           ) : (
             <ul className="roomsList overflow-scroll max-h-[70vh] overflow-y-hidden overflow-x-hidden">
@@ -189,6 +190,34 @@ const Chat = () => {
               className="chatBoxBody h-[70vh] flex flex-col overflow-scroll overflow-x-hidden scroll-mx-0 py-3"
             >
               <div className="chatBoxMsg min-h-[500px]">
+                {!messages && (
+                  <div className="flex flex-col">
+                    <div>
+                      <div className="w-[300px] h-[100px] bg-slate-200 rounded p-3 animate-pulse my-2 flex flex-col">
+                        <div className="bg-slate-100 text-center mb-2 w-full h-[20px]"></div>
+                        <div className="bg-slate-100 text-center my-2 w-[50px] h-[20px]"></div>
+                        <div className="bg-slate-100 text-center my-2 w-[125px] h-[20px]"></div>
+                      </div>
+                      <div className="w-[300px] h-[100px] bg-slate-200 rounded p-3 animate-pulse flex flex-col items-end float-right my-2">
+                        <div className="bg-slate-100 text-center mb-2 w-full h-[20px]"></div>
+                        <div className="bg-slate-100 text-center my-2 w-[50px] h-[20px]"></div>
+                        <div className="bg-slate-100 text-center my-2 w-[125px] h-[20px]"></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="w-[300px] h-[100px] bg-slate-200 rounded p-3 animate-pulse my-2 flex flex-col">
+                        <div className="bg-slate-100 text-center mb-2 w-full h-[20px]"></div>
+                        <div className="bg-slate-100 text-center my-2 w-[50px] h-[20px]"></div>
+                        <div className="bg-slate-100 text-center my-2 w-[125px] h-[20px]"></div>
+                      </div>
+                      <div className="w-[300px] h-[100px] bg-slate-200 rounded p-3 animate-pulse flex flex-col items-end float-right my-2">
+                        <div className="bg-slate-100 text-center mb-2 w-full h-[20px]"></div>
+                        <div className="bg-slate-100 text-center my-2 w-[50px] h-[20px]"></div>
+                        <div className="bg-slate-100 text-center my-2 w-[125px] h-[20px]"></div>
+                      </div>
+                    </div>
+                  </div>
+                )}
                 {messages &&
                   messages.map((msg) => {
                     if (msg?.from === "admin") {
