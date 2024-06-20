@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Alert, Button, Card, Label, TextInput } from "flowbite-react";
+import { Alert, Button, Card, Label, Spinner, TextInput } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { FaCircleExclamation } from "react-icons/fa6";
 import { useUserContext } from "../store/UserContext";
@@ -12,6 +12,7 @@ const Login = () => {
     password: "",
   });
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const SERVER_HOST = import.meta.env.VITE_SERVER_HOST;
 
@@ -28,6 +29,7 @@ const Login = () => {
   };
 
   const handleLogin = async (e) => {
+    setLoading(true);
     e.preventDefault();
     setError(null);
     try {
@@ -40,12 +42,14 @@ const Login = () => {
       );
 
       if (response.status === 200) {
+        setLoading(false);
         const data = await response.data;
         setUser(data.user);
         setIsLoggedIn(true);
         navigate("/dashboard");
       }
     } catch (error) {
+      setLoading(false);
       console.log(error);
       if(error.response.status === 401){
         window.location.reload();
@@ -107,8 +111,10 @@ const Login = () => {
               name="password"
             ></TextInput>
           </div>
-          <Button type="submit" className="w-full">
-            Login
+          <Button type="submit" className="w-full" disabled={loading}>
+            {
+              loading ? <span className="flex items-center"><Spinner size="sm" className="mr-2"/>Loging in ...</span> : "Login"
+            }
           </Button>
         </form>
       </Card>
