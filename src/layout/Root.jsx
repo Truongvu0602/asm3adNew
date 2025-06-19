@@ -13,6 +13,32 @@ const Root = () => {
   const SERVER_HOST = import.meta.env.VITE_SERVER_HOST;
 
   // Re-check authentication everytime the app is rendered
+  // useEffect(() => {
+  //   const checkAuthen = async () => {
+  //     try {
+  //       const response = await axios.get(`${SERVER_HOST}/admin/authen`, {
+  //         withCredentials: true,
+  //       });
+
+  //       if (response.status === 200) {
+  //         const data = await response.data;
+  //         if (data.user) {
+  //           setUser(data.user);
+  //           setIsLoggedIn(true);
+  //         }
+  //       }
+  //     } catch (error) {
+  //       // console.log(error);
+  //       const newError = new Error(
+  //         "Something went wrong, authentication failed!"
+  //       );
+  //       error.status = 500;
+  //       navigate("/login");
+  //       throw newError;
+  //     }
+  //   };
+  //   checkAuthen();
+  // }, []);
   useEffect(() => {
     const checkAuthen = async () => {
       try {
@@ -20,25 +46,23 @@ const Root = () => {
           withCredentials: true,
         });
 
-        if (response.status === 200) {
-          const data = await response.data;
-          if (data.user) {
-            setUser(data.user);
-            setIsLoggedIn(true);
-          }
+        if (response.status === 200 && response.data.user) {
+          setUser(response.data.user);
+          setIsLoggedIn(true);
+        } else {
+          navigate("/login");
         }
       } catch (error) {
-        // console.log(error);
-        const newError = new Error(
-          "Something went wrong, authentication failed!"
+        console.error(
+          "Authentication failed:",
+          error?.response?.data || error.message
         );
-        error.status = 500;
         navigate("/login");
-        throw newError;
       }
     };
+
     checkAuthen();
-  }, [isLoggedIn]);
+  }, []);
 
   return (
     <div className="relative font-poppins">
