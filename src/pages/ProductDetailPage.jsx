@@ -15,7 +15,7 @@ const ProductDetailPage = () => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `${SERVER_HOST}/admin/products/${productId}`,
+          `${SERVER_HOST}admin/products/${productId}`,
           { withCredentials: true }
         );
         if (response.status === 200) {
@@ -31,12 +31,13 @@ const ProductDetailPage = () => {
     };
 
     fetchProduct();
-
   }, [productId]);
 
-  return <div>
-    <ProductDetail product={product}/>
-  </div>;
+  return (
+    <div>
+      <ProductDetail product={product} />
+    </div>
+  );
 };
 
 export default ProductDetailPage;

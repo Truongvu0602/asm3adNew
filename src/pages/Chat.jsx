@@ -28,7 +28,7 @@ const Chat = () => {
       setLoading(true);
 
       try {
-        const response = await axios.get(`${SERVER_HOST}/admin/chat`, {
+        const response = await axios.get(`${SERVER_HOST}admin/chat`, {
           withCredentials: true,
         });
 

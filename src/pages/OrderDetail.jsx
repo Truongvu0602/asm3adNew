@@ -14,7 +14,7 @@ const OrderDetail = () => {
     const fetchOrder = async () => {
       try {
         const response = await axios.get(
-          `${SERVER_HOST}/admin/orders/${orderId}`,
+          `${SERVER_HOST}admin/orders/${orderId}`,
           { withCredentials: true }
         );
         if (response.status === 200) {
