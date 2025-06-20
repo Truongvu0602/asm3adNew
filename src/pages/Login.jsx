@@ -18,7 +18,6 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-
   const { setUser, setIsLoggedIn, isLoggedIn } = useUserContext();
 
   const handleFieldsChange = (e) => {
@@ -33,13 +32,9 @@ const Login = () => {
     e.preventDefault();
     setError(null);
     try {
-      const response = await axios.post(
-        `${SERVER_HOST}/admin/login`,
-        form,
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await axios.post(`${SERVER_HOST}admin/login`, form, {
+        withCredentials: true,
+      });
 
       if (response.status === 200) {
         setLoading(false);
@@ -51,7 +46,7 @@ const Login = () => {
     } catch (error) {
       setLoading(false);
       console.log(error);
-      if(error.response.status === 401){
+      if (error.response.status === 401) {
         window.location.reload();
       }
       if (error && error.response.data.message) {
@@ -63,17 +58,20 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if(isLoggedIn) navigate('/dashboard');
-  },[])
+    if (isLoggedIn) navigate("/dashboard");
+  }, []);
 
-  if(isLoggedIn){
+  if (isLoggedIn) {
     return (
       <div className="bg-zinc-700 min-h-screen min-w-screen flex flex-col gap-5 items-center justify-center">
         <Alert color="info" icon={HiExclamationCircle}>
-          You&apos;re already logged in. <Link className="font-bold" to="/dashboard">Go to dashboard</Link>
+          You&apos;re already logged in.{" "}
+          <Link className="font-bold" to="/dashboard">
+            Go to dashboard
+          </Link>
         </Alert>
       </div>
-    )
+    );
   }
 
   return (
@@ -112,9 +110,14 @@ const Login = () => {
             ></TextInput>
           </div>
           <Button type="submit" className="w-full" disabled={loading}>
-            {
-              loading ? <span className="flex items-center"><Spinner size="sm" className="mr-2"/>Loging in ...</span> : "Login"
-            }
+            {loading ? (
+              <span className="flex items-center">
+                <Spinner size="sm" className="mr-2" />
+                Loging in ...
+              </span>
+            ) : (
+              "Login"
+            )}
           </Button>
         </form>
       </Card>
