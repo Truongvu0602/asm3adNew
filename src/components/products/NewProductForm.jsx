@@ -212,28 +212,203 @@ const NewProductForm = () => {
   //     </form>
   //   </div>
   // );
+  // if (success) {
+  //   return (
+  //     <div>
+  //       <div
+  //         style={{
+  //           padding: "0.75rem",
+  //           display: "flex",
+  //           alignItems: "center",
+  //           gap: "1rem",
+  //         }}
+  //       >
+  //         <HiCheckCircle size={40} color="green" />
+  //         <h1 style={{ fontSize: "1.5rem", fontWeight: "bold" }}>
+  //           Success added new Product
+  //         </h1>
+  //       </div>
+  //       <Link to="/products">
+  //         <Button
+  //           style={{
+  //             marginLeft: "1.25rem",
+  //             display: "flex",
+  //             alignItems: "center",
+  //           }}
+  //         >
+  //           <HiArrowUturnLeft style={{ marginRight: "0.5rem" }} />
+  //           Back to products page
+  //         </Button>
+  //       </Link>
+  //     </div>
+  //   );
+  // }
+
+  // return (
+  //   <div style={{ padding: "0.75rem" }}>
+  //     <form onSubmit={handleSubmit}>
+  //       <div style={{ marginBottom: "1.5rem" }}>
+  //         <Label htmlFor="name">Product's Name: </Label>
+  //         <TextInput
+  //           id="name"
+  //           value={form.name}
+  //           type="text"
+  //           name="name"
+  //           required
+  //           onChange={handleFieldChange}
+  //           disabled={loading}
+  //         />
+  //       </div>
+
+  //       <div style={{ marginBottom: "1.5rem" }}>
+  //         <Label htmlFor="category">Product's Category: </Label>
+  //         <TextInput
+  //           id="category"
+  //           value={form.category}
+  //           type="text"
+  //           name="category"
+  //           required
+  //           onChange={handleFieldChange}
+  //           disabled={loading}
+  //         />
+  //       </div>
+
+  //       <div style={{ marginBottom: "1.5rem" }}>
+  //         <Label htmlFor="price">Product's Price: </Label>
+  //         <TextInput
+  //           id="price"
+  //           value={form.price}
+  //           type="text"
+  //           name="price"
+  //           required
+  //           onChange={handleFieldChange}
+  //           disabled={loading}
+  //         />
+  //       </div>
+
+  //       <div style={{ marginBottom: "1.5rem" }}>
+  //         <Label htmlFor="long_desc">Product's Long Description: </Label>
+  //         <TextInput
+  //           id="long_desc"
+  //           value={form.long_desc}
+  //           type="text"
+  //           name="long_desc"
+  //           required
+  //           onChange={handleFieldChange}
+  //           disabled={loading}
+  //         />
+  //       </div>
+
+  //       <div style={{ marginBottom: "1.5rem" }}>
+  //         <Label htmlFor="short_desc">Product's Short Description: </Label>
+  //         <TextInput
+  //           id="short_desc"
+  //           value={form.short_desc}
+  //           type="text"
+  //           name="short_desc"
+  //           required
+  //           onChange={handleFieldChange}
+  //           disabled={loading}
+  //         />
+  //       </div>
+
+  //       <div style={{ marginBottom: "1.5rem" }}>
+  //         <Label htmlFor="stock">Product stock: </Label>
+  //         <TextInput
+  //           id="stock"
+  //           value={form.stock}
+  //           type="text"
+  //           name="stock"
+  //           required
+  //           onChange={handleFieldChange}
+  //           disabled={loading}
+  //         />
+  //       </div>
+
+  //       <div style={{ marginBottom: "1.5rem" }}>
+  //         <Label htmlFor="images">Product's Images: </Label>
+  //         <FileInput
+  //           id="images"
+  //           name="images"
+  //           multiple
+  //           onChange={handleFileChange}
+  //           disabled={loading}
+  //         />
+  //       </div>
+
+  //       <div
+  //         style={{
+  //           display: "flex",
+  //           justifyContent: "space-between",
+  //           alignItems: "center",
+  //           marginTop: "5rem",
+  //         }}
+  //       >
+  //         <Button color="success" type="submit">
+  //           <div style={{ display: "flex", alignItems: "center" }}>
+  //             {loading ? (
+  //               <Spinner
+  //                 size="sm"
+  //                 color="success"
+  //                 style={{ marginRight: "0.5rem" }}
+  //               />
+  //             ) : (
+  //               <PiPlusCircle
+  //                 style={{
+  //                   width: "1.25rem",
+  //                   height: "1.25rem",
+  //                   marginRight: "0.5rem",
+  //                 }}
+  //               />
+  //             )}
+  //             Add product
+  //           </div>
+  //         </Button>
+
+  //         {error && (
+  //           <Alert color="failure" onDismiss={() => setError(null)}>
+  //             {error}
+  //           </Alert>
+  //         )}
+  //       </div>
+  //     </form>
+  //   </div>
+  // );
   if (success) {
     return (
-      <div>
+      <div style={{ padding: "1.5rem" }}>
         <div
           style={{
-            padding: "0.75rem",
+            padding: "1rem",
             display: "flex",
             alignItems: "center",
             gap: "1rem",
+            backgroundColor: "#f0fdf4", // green-50
+            border: "1px solid #bbf7d0", // green-200
+            borderRadius: "0.5rem",
           }}
         >
           <HiCheckCircle size={40} color="green" />
-          <h1 style={{ fontSize: "1.5rem", fontWeight: "bold" }}>
-            Success added new Product
+          <h1
+            style={{ fontSize: "1.5rem", fontWeight: "bold", color: "#166534" }}
+          >
+            Successfully added new product
           </h1>
         </div>
+
         <Link to="/products">
           <Button
             style={{
-              marginLeft: "1.25rem",
+              marginTop: "1.5rem",
               display: "flex",
               alignItems: "center",
+              backgroundColor: "#0ea5e9",
+              color: "white",
+              padding: "0.5rem 1rem",
+              borderRadius: "0.375rem",
+              fontWeight: "500",
+              border: "none",
+              cursor: "pointer",
             }}
           >
             <HiArrowUturnLeft style={{ marginRight: "0.5rem" }} />
@@ -243,90 +418,58 @@ const NewProductForm = () => {
       </div>
     );
   }
-
   return (
-    <div style={{ padding: "0.75rem" }}>
+    <div style={{ padding: "1.5rem" }}>
       <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: "1.5rem" }}>
-          <Label htmlFor="name">Product's Name: </Label>
-          <TextInput
-            id="name"
-            value={form.name}
-            type="text"
-            name="name"
-            required
-            onChange={handleFieldChange}
-            disabled={loading}
-          />
-        </div>
+        {[
+          { label: "Product's Name", id: "name" },
+          { label: "Product's Category", id: "category" },
+          { label: "Product's Price", id: "price" },
+          { label: "Product's Long Description", id: "long_desc" },
+          { label: "Product's Short Description", id: "short_desc" },
+          { label: "Product Stock", id: "stock" },
+        ].map(({ label, id }) => (
+          <div key={id} style={{ marginBottom: "1.5rem" }}>
+            <Label
+              htmlFor={id}
+              style={{
+                display: "block",
+                fontWeight: "500",
+                marginBottom: "0.5rem",
+              }}
+            >
+              {label}:
+            </Label>
+            <TextInput
+              id={id}
+              name={id}
+              type="text"
+              required
+              value={form[id]}
+              onChange={handleFieldChange}
+              disabled={loading}
+              style={{
+                width: "100%",
+                padding: "0.5rem",
+                border: "1px solid #cbd5e1",
+                borderRadius: "0.375rem",
+                fontSize: "0.875rem",
+              }}
+            />
+          </div>
+        ))}
 
         <div style={{ marginBottom: "1.5rem" }}>
-          <Label htmlFor="category">Product's Category: </Label>
-          <TextInput
-            id="category"
-            value={form.category}
-            type="text"
-            name="category"
-            required
-            onChange={handleFieldChange}
-            disabled={loading}
-          />
-        </div>
-
-        <div style={{ marginBottom: "1.5rem" }}>
-          <Label htmlFor="price">Product's Price: </Label>
-          <TextInput
-            id="price"
-            value={form.price}
-            type="text"
-            name="price"
-            required
-            onChange={handleFieldChange}
-            disabled={loading}
-          />
-        </div>
-
-        <div style={{ marginBottom: "1.5rem" }}>
-          <Label htmlFor="long_desc">Product's Long Description: </Label>
-          <TextInput
-            id="long_desc"
-            value={form.long_desc}
-            type="text"
-            name="long_desc"
-            required
-            onChange={handleFieldChange}
-            disabled={loading}
-          />
-        </div>
-
-        <div style={{ marginBottom: "1.5rem" }}>
-          <Label htmlFor="short_desc">Product's Short Description: </Label>
-          <TextInput
-            id="short_desc"
-            value={form.short_desc}
-            type="text"
-            name="short_desc"
-            required
-            onChange={handleFieldChange}
-            disabled={loading}
-          />
-        </div>
-
-        <div style={{ marginBottom: "1.5rem" }}>
-          <Label htmlFor="stock">Product stock: </Label>
-          <TextInput
-            id="stock"
-            value={form.stock}
-            type="text"
-            name="stock"
-            required
-            onChange={handleFieldChange}
-            disabled={loading}
-          />
-        </div>
-
-        <div style={{ marginBottom: "1.5rem" }}>
-          <Label htmlFor="images">Product's Images: </Label>
+          <Label
+            htmlFor="images"
+            style={{
+              display: "block",
+              fontWeight: "500",
+              marginBottom: "0.5rem",
+            }}
+          >
+            Product's Images:
+          </Label>
           <FileInput
             id="images"
             name="images"
@@ -341,32 +484,54 @@ const NewProductForm = () => {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            marginTop: "5rem",
+            marginTop: "3rem",
           }}
         >
-          <Button color="success" type="submit">
-            <div style={{ display: "flex", alignItems: "center" }}>
-              {loading ? (
-                <Spinner
-                  size="sm"
-                  color="success"
-                  style={{ marginRight: "0.5rem" }}
-                />
-              ) : (
-                <PiPlusCircle
-                  style={{
-                    width: "1.25rem",
-                    height: "1.25rem",
-                    marginRight: "0.5rem",
-                  }}
-                />
-              )}
-              Add product
-            </div>
+          <Button
+            color="success"
+            type="submit"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              backgroundColor: "#10b981",
+              color: "white",
+              padding: "0.5rem 1.25rem",
+              borderRadius: "0.375rem",
+              border: "none",
+              fontWeight: "500",
+              cursor: "pointer",
+            }}
+          >
+            {loading ? (
+              <Spinner
+                size="sm"
+                color="success"
+                style={{ marginRight: "0.5rem" }}
+              />
+            ) : (
+              <PiPlusCircle
+                style={{
+                  width: "1.25rem",
+                  height: "1.25rem",
+                  marginRight: "0.5rem",
+                }}
+              />
+            )}
+            Add product
           </Button>
 
           {error && (
-            <Alert color="failure" onDismiss={() => setError(null)}>
+            <Alert
+              color="failure"
+              onDismiss={() => setError(null)}
+              style={{
+                marginLeft: "1rem",
+                padding: "0.75rem 1rem",
+                borderRadius: "0.375rem",
+                backgroundColor: "#fee2e2",
+                color: "#b91c1c",
+              }}
+            >
               {error}
             </Alert>
           )}

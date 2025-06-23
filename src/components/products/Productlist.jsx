@@ -160,117 +160,280 @@ const Productlist = () => {
   //     </div>
   //   </div>
   // );
+  // return (
+  //   <div>
+  //     <h1 style={{ color: "#64748b", margin: "0.5rem", fontWeight: "bold" }}>
+  //       Products
+  //     </h1>
+  //     <div>
+  //       <div
+  //         style={{
+  //           margin: "1.25rem 0",
+  //           display: "flex",
+  //           alignItems: "center",
+  //           justifyContent: "space-between",
+  //         }}
+  //       >
+  //         <input
+  //           type="text"
+  //           value={inputVal}
+  //           onChange={handleUserInputchange}
+  //           placeholder="Search product"
+  //         />
+  //         <Link to={"/products/add-new"}>
+  //           <Button
+  //             style={{
+  //               marginRight: "0.5rem",
+  //               display: "flex",
+  //               alignItems: "center",
+  //             }}
+  //           >
+  //             <HiPlusCircle
+  //               style={{
+  //                 width: "1.25rem",
+  //                 height: "1.25rem",
+  //                 marginRight: "0.75rem",
+  //               }}
+  //             />
+  //             <span>Add new product</span>
+  //           </Button>
+  //         </Link>
+  //       </div>
+
+  //       <div>
+  //         <table
+  //           style={{ width: "100%", textAlign: "center", tableLayout: "auto" }}
+  //         >
+  //           <thead style={{ backgroundColor: "#cbd5e1" }}>
+  //             <tr>
+  //               <th style={{ padding: "0.75rem 0" }}>ID</th>
+  //               <th>Name</th>
+  //               <th>Price</th>
+  //               <th>Image</th>
+  //               <th>Category</th>
+  //               <th>Actions</th>
+  //             </tr>
+  //           </thead>
+  //           <tbody>
+  //             {products &&
+  //               products.map((product) => {
+  //                 return (
+  //                   <tr
+  //                     key={product._id}
+  //                     style={{
+  //                       borderBottom: "1px solid #cbd5e1",
+  //                       color: "#64748b",
+  //                       cursor: "pointer",
+  //                     }}
+  //                     onMouseOver={(e) =>
+  //                       (e.currentTarget.style.backgroundColor = "#f1f5f9")
+  //                     }
+  //                     onMouseOut={(e) =>
+  //                       (e.currentTarget.style.backgroundColor = "transparent")
+  //                     }
+  //                   >
+  //                     <td style={{ padding: "0.75rem 0" }}>{product._id}</td>
+  //                     <td>{product.name}</td>
+  //                     <td>
+  //                       {new Intl.NumberFormat("vi-VN", {
+  //                         style: "currency",
+  //                         currency: "VND",
+  //                       }).format(product.price)}
+  //                     </td>
+  //                     <td>
+  //                       <img
+  //                         src={product.images[0]}
+  //                         alt={product.name}
+  //                         style={{
+  //                           width: "3rem",
+  //                           height: "3rem",
+  //                           margin: "0.5rem",
+  //                         }}
+  //                       />
+  //                     </td>
+  //                     <td>{product.category}</td>
+  //                     <td>
+  //                       <ButtonGroup>
+  //                         <Link to={`${product._id}?mode=edit`}>
+  //                           <Button color="warning">Edit</Button>
+  //                         </Link>
+  //                         <Button
+  //                           onClick={() => handleDeleteProduct(product._id)}
+  //                           color="failure"
+  //                         >
+  //                           Delete
+  //                         </Button>
+  //                       </ButtonGroup>
+  //                     </td>
+  //                   </tr>
+  //                 );
+  //               })}
+  //           </tbody>
+  //         </table>
+  //       </div>
+  //     </div>
+  //   </div>
+  // );
   return (
-    <div>
-      <h1 style={{ color: "#64748b", margin: "0.5rem", fontWeight: "bold" }}>
+    <div style={{ padding: "1rem" }}>
+      <h1
+        style={{
+          color: "#64748b",
+          marginBottom: "1rem",
+          fontWeight: "bold",
+          fontSize: "1.25rem",
+        }}
+      >
         Products
       </h1>
-      <div>
-        <div
+
+      <div
+        style={{
+          marginBottom: "1.5rem",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <input
+          type="text"
+          value={inputVal}
+          onChange={handleUserInputchange}
+          placeholder="Search product"
           style={{
-            margin: "1.25rem 0",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
+            padding: "0.5rem 1rem",
+            border: "1px solid #cbd5e1",
+            borderRadius: "0.375rem",
+            fontSize: "0.875rem",
+            width: "250px",
+            outline: "none",
+          }}
+        />
+        <Link to={"/products/add-new"}>
+          <Button
+            style={{
+              display: "flex",
+              alignItems: "center",
+              backgroundColor: "#10b981",
+              color: "white",
+              fontWeight: "500",
+              padding: "0.5rem 1rem",
+              borderRadius: "0.375rem",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            <HiPlusCircle
+              style={{
+                width: "1.25rem",
+                height: "1.25rem",
+                marginRight: "0.5rem",
+              }}
+            />
+            <span>Add new product</span>
+          </Button>
+        </Link>
+      </div>
+
+      <div style={{ overflowX: "auto" }}>
+        <table
+          style={{
+            width: "100%",
+            textAlign: "center",
+            borderCollapse: "collapse",
           }}
         >
-          <input
-            type="text"
-            value={inputVal}
-            onChange={handleUserInputchange}
-            placeholder="Search product"
-          />
-          <Link to={"/products/add-new"}>
-            <Button
-              style={{
-                marginRight: "0.5rem",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <HiPlusCircle
-                style={{
-                  width: "1.25rem",
-                  height: "1.25rem",
-                  marginRight: "0.75rem",
-                }}
-              />
-              <span>Add new product</span>
-            </Button>
-          </Link>
-        </div>
-
-        <div>
-          <table
-            style={{ width: "100%", textAlign: "center", tableLayout: "auto" }}
-          >
-            <thead style={{ backgroundColor: "#cbd5e1" }}>
-              <tr>
-                <th style={{ padding: "0.75rem 0" }}>ID</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Image</th>
-                <th>Category</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {products &&
-                products.map((product) => {
-                  return (
-                    <tr
-                      key={product._id}
+          <thead style={{ backgroundColor: "#e2e8f0", color: "#334155" }}>
+            <tr>
+              <th style={{ padding: "1rem" }}>ID</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Image</th>
+              <th>Category</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {products &&
+              products.map((product) => (
+                <tr
+                  key={product._id}
+                  style={{
+                    borderBottom: "1px solid #e2e8f0",
+                    color: "#475569",
+                    transition: "background-color 0.2s",
+                  }}
+                  onMouseOver={(e) =>
+                    (e.currentTarget.style.backgroundColor = "#f1f5f9")
+                  }
+                  onMouseOut={(e) =>
+                    (e.currentTarget.style.backgroundColor = "transparent")
+                  }
+                >
+                  <td style={{ padding: "0.75rem" }}>{product._id}</td>
+                  <td>{product.name}</td>
+                  <td>
+                    {new Intl.NumberFormat("vi-VN", {
+                      style: "currency",
+                      currency: "VND",
+                    }).format(product.price)}
+                  </td>
+                  <td>
+                    <img
+                      src={product.images[0]}
+                      alt={product.name}
                       style={{
-                        borderBottom: "1px solid #cbd5e1",
-                        color: "#64748b",
-                        cursor: "pointer",
+                        width: "3rem",
+                        height: "3rem",
+                        objectFit: "cover",
+                        borderRadius: "0.375rem",
                       }}
-                      onMouseOver={(e) =>
-                        (e.currentTarget.style.backgroundColor = "#f1f5f9")
-                      }
-                      onMouseOut={(e) =>
-                        (e.currentTarget.style.backgroundColor = "transparent")
-                      }
+                    />
+                  </td>
+                  <td>{product.category}</td>
+                  <td>
+                    <div
+                      style={{
+                        display: "flex",
+                        gap: "0.5rem",
+                        justifyContent: "center",
+                      }}
                     >
-                      <td style={{ padding: "0.75rem 0" }}>{product._id}</td>
-                      <td>{product.name}</td>
-                      <td>
-                        {new Intl.NumberFormat("vi-VN", {
-                          style: "currency",
-                          currency: "VND",
-                        }).format(product.price)}
-                      </td>
-                      <td>
-                        <img
-                          src={product.images[0]}
-                          alt={product.name}
+                      <Link to={`${product._id}?mode=edit`}>
+                        <Button
                           style={{
-                            width: "3rem",
-                            height: "3rem",
-                            margin: "0.5rem",
+                            backgroundColor: "#facc15",
+                            color: "#1e293b",
+                            fontWeight: "500",
+                            padding: "0.25rem 0.75rem",
+                            border: "none",
+                            borderRadius: "0.375rem",
+                            cursor: "pointer",
                           }}
-                        />
-                      </td>
-                      <td>{product.category}</td>
-                      <td>
-                        <ButtonGroup>
-                          <Link to={`${product._id}?mode=edit`}>
-                            <Button color="warning">Edit</Button>
-                          </Link>
-                          <Button
-                            onClick={() => handleDeleteProduct(product._id)}
-                            color="failure"
-                          >
-                            Delete
-                          </Button>
-                        </ButtonGroup>
-                      </td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
-        </div>
+                        >
+                          Edit
+                        </Button>
+                      </Link>
+                      <Button
+                        onClick={() => handleDeleteProduct(product._id)}
+                        style={{
+                          backgroundColor: "#ef4444",
+                          color: "white",
+                          fontWeight: "500",
+                          padding: "0.25rem 0.75rem",
+                          border: "none",
+                          borderRadius: "0.375rem",
+                          cursor: "pointer",
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

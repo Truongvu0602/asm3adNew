@@ -66,7 +66,7 @@ const Header = () => {
           position: "fixed",
           top: 0,
           zIndex: 10,
-          width: "100%",
+          width: "90%",
           minHeight: "70px",
           backgroundColor: "rgba(203, 213, 225, 0.8)", // bg-slate-300/80
           color: "black",

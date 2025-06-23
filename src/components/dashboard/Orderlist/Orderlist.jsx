@@ -35,12 +35,21 @@ const Orderlist = () => {
 
   if (!orderData || loading) {
     return (
-      <div className="mt-5">
-        <h1 className="text-slate-500 m-2 font-bold">History</h1>
-        <table className="table-fixed w-full text-center text-sm">
+      <div style={{ marginTop: "1.25rem" }}>
+        <h1 style={{ color: "#64748b", margin: "0.5rem", fontWeight: "bold" }}>
+          History
+        </h1>
+        <table
+          style={{
+            width: "100%",
+            textAlign: "center",
+            fontSize: "0.875rem",
+            tableLayout: "fixed",
+          }}
+        >
           <thead>
-            <tr className=" bg-slate-200">
-              <th className="!py-5">User ID</th>
+            <tr style={{ backgroundColor: "#e2e8f0" }}>
+              <th style={{ padding: "1.25rem 0" }}>User ID</th>
               <th>Username</th>
               <th>Phone</th>
               <th>Address</th>
@@ -50,21 +59,32 @@ const Orderlist = () => {
               <th>Detail</th>
             </tr>
           </thead>
-          <div className="!min-w-full my-3">
-            <Spinner /> Loading ...
-          </div>
         </table>
+        <div
+          style={{ width: "100%", margin: "0.75rem 0", textAlign: "center" }}
+        >
+          <Spinner /> Loading ...
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="mt-5">
-      <h1 className="text-slate-500 m-2 font-bold">History</h1>
-      <table className="table-auto w-full text-center text-sm">
+    <div style={{ marginTop: "1.25rem" }}>
+      <h1 style={{ color: "#64748b", margin: "0.5rem", fontWeight: "bold" }}>
+        History
+      </h1>
+      <table
+        style={{
+          width: "100%",
+          textAlign: "center",
+          fontSize: "0.875rem",
+          tableLayout: "auto",
+        }}
+      >
         <thead>
-          <tr className=" bg-slate-200">
-            <th className="!py-5">User ID</th>
+          <tr style={{ backgroundColor: "#e2e8f0" }}>
+            <th style={{ padding: "1.25rem 0" }}>User ID</th>
             <th>Username</th>
             <th>Phone</th>
             <th>Address</th>
@@ -74,32 +94,60 @@ const Orderlist = () => {
             <th>Detail</th>
           </tr>
         </thead>
-        <tbody className="text-slate-500">
-          {orderData && orderData.orders.length > 0 ? (
+        <tbody style={{ color: "#64748b" }}>
+          {orderData.orders.length > 0 ? (
             orderData.orders.map((order) => (
-              <tr className="hover:bg-slate-100 border-b" key={order._id}>
+              <tr
+                key={order._id}
+                style={{
+                  borderBottom: "1px solid #e2e8f0",
+                  transition: "background-color 0.2s",
+                }}
+                onMouseOver={(e) =>
+                  (e.currentTarget.style.backgroundColor = "#f1f5f9")
+                }
+                onMouseOut={(e) =>
+                  (e.currentTarget.style.backgroundColor = "transparent")
+                }
+              >
                 <td>{order.user}</td>
                 <td>{order.name}</td>
                 <td>{order.phone}</td>
                 <td>{order.address}</td>
-                <td>
-                  {new Intl.NumberFormat().format(order.totalPrice, {
-                    style: "currency",
-                    currency: "VND",
-                  })}{" "}
-                  VND
-                </td>
+                <td>{new Intl.NumberFormat().format(order.totalPrice)} VND</td>
                 <td>{order.paymentStatus}</td>
                 <td>{order.status}</td>
-                <td className="flex items-center justify-center py-5">
-                  <Link to={`/order/${order._id}`}>
-                    <Button
-                      color="success"
-                      className="btn btn-sm btn-primary w-12 h-10"
-                    >
-                      Detail
-                    </Button>
-                  </Link>
+                <td>
+                  <div
+                    style={{
+                      padding: "1.25rem 0",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Link to={`/order/${order._id}`}>
+                      <Button
+                        style={{
+                          backgroundColor: "#22c55e",
+                          color: "white",
+                          padding: "0.5rem 1rem",
+                          borderRadius: "0.25rem",
+                          border: "none",
+                          cursor: "pointer",
+                          fontSize: "0.875rem",
+                          transition: "transform 0.15s ease",
+                        }}
+                        onMouseOver={(e) =>
+                          (e.currentTarget.style.transform = "scale(1.05)")
+                        }
+                        onMouseOut={(e) =>
+                          (e.currentTarget.style.transform = "scale(1)")
+                        }
+                      >
+                        Detail
+                      </Button>
+                    </Link>
+                  </div>
                 </td>
               </tr>
             ))
@@ -110,14 +158,31 @@ const Orderlist = () => {
           )}
         </tbody>
       </table>
-      <div className="pages flex items-center justify-center rounded">
+
+      {/* Pagination */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: "0.25rem",
+          marginTop: "0.75rem",
+        }}
+      >
         {[...Array(Math.ceil(orderData.total / 5))].map((_, index) => (
           <button
-            className={`${
-              page === index + 1 && "font-bold !text-black"
-            } !text-slate-500 mt-2 px-2 bg-slate-200`}
             key={index}
             onClick={() => setPage(index + 1)}
+            style={{
+              backgroundColor: "#e2e8f0",
+              color: page === index + 1 ? "#000" : "#64748b",
+              fontWeight: page === index + 1 ? "bold" : "normal",
+              padding: "0.25rem 0.5rem",
+              margin: "0 0.25rem",
+              border: "none",
+              borderRadius: "0.25rem",
+              cursor: "pointer",
+            }}
           >
             {index + 1}
           </button>

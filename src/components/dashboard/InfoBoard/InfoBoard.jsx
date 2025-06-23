@@ -13,7 +13,7 @@ const InfoBoard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${SERVER_HOST}admin/info`, {
+        const response = await axios.get(`${SERVER_HOST}/admin/info`, {
           withCredentials: true,
         });
         if (response.status === 200) {

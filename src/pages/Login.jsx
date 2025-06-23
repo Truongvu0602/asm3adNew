@@ -126,7 +126,7 @@ const Login = () => {
   return isLoggedIn ? (
     <div
       style={{
-        backgroundColor: "#3f3f46", // bg-zinc-700
+        backgroundColor: "#3f3f46",
         minHeight: "100vh",
         minWidth: "100vw",
         display: "flex",
@@ -138,7 +138,14 @@ const Login = () => {
     >
       <Alert color="info" icon={HiExclamationCircle}>
         You're already logged in.{" "}
-        <Link to="/dashboard" style={{ fontWeight: "bold" }}>
+        <Link
+          to="/dashboard"
+          style={{
+            fontWeight: "bold",
+            textDecoration: "underline",
+            color: "#93c5fd",
+          }}
+        >
           Go to dashboard
         </Link>
       </Alert>
@@ -157,7 +164,10 @@ const Login = () => {
       }}
     >
       <Alert
-        style={{ opacity: error ? 1 : 0, transition: "opacity 0.3s" }}
+        style={{
+          opacity: error ? 1 : 0,
+          transition: "opacity 0.3s",
+        }}
         color="failure"
         onDismiss={() => setError(null)}
         icon={FaCircleExclamation}
@@ -165,60 +175,113 @@ const Login = () => {
         {error}
       </Alert>
 
-      <Card
+      <div
         style={{
           width: "350px",
-          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-          padding: "1rem",
+          backgroundColor: "#fff",
+          borderRadius: "12px",
+          padding: "1.5rem",
+          boxShadow: "0 8px 16px rgba(0,0,0,0.2)",
         }}
       >
         <h1
           style={{
             textTransform: "uppercase",
             fontWeight: "bold",
+            fontSize: "1.2rem",
             marginBottom: "1rem",
+            textAlign: "center",
           }}
         >
           Shop admin login
         </h1>
 
-        <form onSubmit={handleLogin}>
-          <div style={{ margin: "0.75rem 0" }}>
+        <form
+          onSubmit={handleLogin}
+          style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+        >
+          <div>
             <Label htmlFor="email" value="Email :" />
-            <TextInput
+            <input
               id="email"
+              name="email"
+              type="email"
+              placeholder="Admin email"
               value={form.email}
               onChange={handleFieldsChange}
-              placeholder="Admin email"
-              type="email"
-              name="email"
+              style={{
+                width: "100%",
+                padding: "10px 12px",
+                border: "1px solid #d1d5db",
+                borderRadius: "8px",
+                fontSize: "1rem",
+                outline: "none",
+                transition: "border-color 0.2s",
+              }}
+              onFocus={(e) => (e.target.style.borderColor = "#3b82f6")}
+              onBlur={(e) => (e.target.style.borderColor = "#d1d5db")}
             />
           </div>
 
-          <div style={{ margin: "0.75rem 0" }}>
+          <div>
             <Label htmlFor="password" value="Password :" />
-            <TextInput
+            <input
               id="password"
+              name="password"
+              type="password"
+              placeholder="Admin password"
               value={form.password}
               onChange={handleFieldsChange}
-              placeholder="Admin password"
-              type="password"
-              name="password"
+              style={{
+                width: "100%",
+                padding: "10px 12px",
+                border: "1px solid #d1d5db",
+                borderRadius: "8px",
+                fontSize: "1rem",
+                outline: "none",
+                transition: "border-color 0.2s",
+              }}
+              onFocus={(e) => (e.target.style.borderColor = "#3b82f6")}
+              onBlur={(e) => (e.target.style.borderColor = "#d1d5db")}
             />
           </div>
 
-          <Button type="submit" disabled={loading} style={{ width: "100%" }}>
+          <button
+            type="submit"
+            disabled={loading}
+            style={{
+              width: "100%",
+              padding: "10px",
+              backgroundColor: loading ? "#60a5fa" : "#3b82f6",
+              color: "#fff",
+              fontWeight: "bold",
+              borderRadius: "8px",
+              border: "none",
+              cursor: loading ? "not-allowed" : "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "0.5rem",
+              transition: "background-color 0.3s, transform 0.2s",
+            }}
+            onMouseEnter={(e) =>
+              !loading && (e.target.style.backgroundColor = "#2563eb")
+            }
+            onMouseLeave={(e) =>
+              !loading && (e.target.style.backgroundColor = "#3b82f6")
+            }
+          >
             {loading ? (
-              <span style={{ display: "flex", alignItems: "center" }}>
-                <Spinner size="sm" style={{ marginRight: "0.5rem" }} />
-                Logging in ...
-              </span>
+              <>
+                <Spinner size="sm" />
+                Logging in...
+              </>
             ) : (
               "Login"
             )}
-          </Button>
+          </button>
         </form>
-      </Card>
+      </div>
     </div>
   );
 };
