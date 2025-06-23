@@ -32,7 +32,7 @@ const Login = () => {
     e.preventDefault();
     setError(null);
     try {
-      const response = await axios.post(`${SERVER_HOST}admin/login`, form, {
+      const response = await axios.post(`${SERVER_HOST}/admin/login`, form, {
         withCredentials: true,
       });
 
@@ -61,33 +61,129 @@ const Login = () => {
     if (isLoggedIn) navigate("/dashboard");
   }, []);
 
-  if (isLoggedIn) {
-    return (
-      <div className="bg-zinc-700 min-h-screen min-w-screen flex flex-col gap-5 items-center justify-center">
-        <Alert color="info" icon={HiExclamationCircle}>
-          You&apos;re already logged in.{" "}
-          <Link className="font-bold" to="/dashboard">
-            Go to dashboard
-          </Link>
-        </Alert>
-      </div>
-    );
-  }
+  // if (isLoggedIn) {
+  //   return (
+  //     <div className="bg-zinc-700 min-h-screen min-w-screen flex flex-col gap-5 items-center justify-center">
+  //       <Alert color="info" icon={HiExclamationCircle}>
+  //         You&apos;re already logged in.{" "}
+  //         <Link className="font-bold" to="/dashboard">
+  //           Go to dashboard
+  //         </Link>
+  //       </Alert>
+  //     </div>
+  //   );
+  // }
 
-  return (
-    <div className="bg-zinc-700 min-h-screen min-w-screen flex flex-col gap-5 items-center justify-center">
+  // return (
+  //   <div className="bg-zinc-700 min-h-screen min-w-screen flex flex-col gap-5 items-center justify-center">
+  //     <Alert
+  //       className={`${error ? "opacity-100" : "opacity-0"}`}
+  //       color="failure"
+  //       onDismiss={() => setError(null)}
+  //       icon={FaCircleExclamation}
+  //     >
+  //       {error}
+  //     </Alert>
+  //     <Card className="w-[350px] shadow-md">
+  //       <h1 className="uppercase font-bold">Shop admin login</h1>
+  //       <form onSubmit={handleLogin}>
+  //         <div className="my-3">
+  //           <Label htmlFor="email" value="Email :" />
+  //           <TextInput
+  //             id="email"
+  //             value={form.email}
+  //             onChange={handleFieldsChange}
+  //             placeholder="Admin email"
+  //             type="email"
+  //             name="email"
+  //           ></TextInput>
+  //         </div>
+  //         <div className="my-3">
+  //           <Label htmlFor="password" value="Password :" />
+  //           <TextInput
+  //             id="password"
+  //             value={form.password}
+  //             onChange={handleFieldsChange}
+  //             placeholder="Admin password"
+  //             type="password"
+  //             name="password"
+  //           ></TextInput>
+  //         </div>
+  //         <Button type="submit" className="w-full" disabled={loading}>
+  //           {loading ? (
+  //             <span className="flex items-center">
+  //               <Spinner size="sm" className="mr-2" />
+  //               Loging in ...
+  //             </span>
+  //           ) : (
+  //             "Login"
+  //           )}
+  //         </Button>
+  //       </form>
+  //     </Card>
+  //   </div>
+  // );
+  return isLoggedIn ? (
+    <div
+      style={{
+        backgroundColor: "#3f3f46", // bg-zinc-700
+        minHeight: "100vh",
+        minWidth: "100vw",
+        display: "flex",
+        flexDirection: "column",
+        gap: "1.25rem",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Alert color="info" icon={HiExclamationCircle}>
+        You're already logged in.{" "}
+        <Link to="/dashboard" style={{ fontWeight: "bold" }}>
+          Go to dashboard
+        </Link>
+      </Alert>
+    </div>
+  ) : (
+    <div
+      style={{
+        backgroundColor: "#3f3f46",
+        minHeight: "100vh",
+        minWidth: "100vw",
+        display: "flex",
+        flexDirection: "column",
+        gap: "1.25rem",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Alert
-        className={`${error ? "opacity-100" : "opacity-0"}`}
+        style={{ opacity: error ? 1 : 0, transition: "opacity 0.3s" }}
         color="failure"
         onDismiss={() => setError(null)}
         icon={FaCircleExclamation}
       >
         {error}
       </Alert>
-      <Card className="w-[350px] shadow-md">
-        <h1 className="uppercase font-bold">Shop admin login</h1>
+
+      <Card
+        style={{
+          width: "350px",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          padding: "1rem",
+        }}
+      >
+        <h1
+          style={{
+            textTransform: "uppercase",
+            fontWeight: "bold",
+            marginBottom: "1rem",
+          }}
+        >
+          Shop admin login
+        </h1>
+
         <form onSubmit={handleLogin}>
-          <div className="my-3">
+          <div style={{ margin: "0.75rem 0" }}>
             <Label htmlFor="email" value="Email :" />
             <TextInput
               id="email"
@@ -96,9 +192,10 @@ const Login = () => {
               placeholder="Admin email"
               type="email"
               name="email"
-            ></TextInput>
+            />
           </div>
-          <div className="my-3">
+
+          <div style={{ margin: "0.75rem 0" }}>
             <Label htmlFor="password" value="Password :" />
             <TextInput
               id="password"
@@ -107,13 +204,14 @@ const Login = () => {
               placeholder="Admin password"
               type="password"
               name="password"
-            ></TextInput>
+            />
           </div>
-          <Button type="submit" className="w-full" disabled={loading}>
+
+          <Button type="submit" disabled={loading} style={{ width: "100%" }}>
             {loading ? (
-              <span className="flex items-center">
-                <Spinner size="sm" className="mr-2" />
-                Loging in ...
+              <span style={{ display: "flex", alignItems: "center" }}>
+                <Spinner size="sm" style={{ marginRight: "0.5rem" }} />
+                Logging in ...
               </span>
             ) : (
               "Login"

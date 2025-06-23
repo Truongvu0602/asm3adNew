@@ -6,6 +6,7 @@ import { Button, Spinner, TextInput } from "flowbite-react";
 import { BiPaperPlane } from "react-icons/bi";
 
 const SERVER_HOST = import.meta.env.VITE_SERVER_HOST;
+
 let socket;
 if (!socket) {
   socket = socketIO(SERVER_HOST, {

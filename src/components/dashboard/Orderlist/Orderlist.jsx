@@ -8,7 +8,8 @@ const Orderlist = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  const SERVER_HOST = import.meta.env.VITE_SERVER_HOST;
+  // const SERVER_HOST = import.meta.env.VITE_SERVER_HOST;
+  const serverHost = import.meta.env.VITE_SERVER_HOST?.replace(/\/+$/, "");
 
   useEffect(() => {
     const fetchData = async () => {

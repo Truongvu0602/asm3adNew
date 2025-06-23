@@ -7,7 +7,8 @@ import axios from "axios";
 const InfoBoard = () => {
   const [infoValues, setInfoValues] = useState({});
 
-  const serverHost = import.meta.env.VITE_SERVER_HOST;
+  // const serverHost = import.meta.env.VITE_SERVER_HOST;
+const serverHost = import.meta.env.VITE_SERVER_HOST?.replace(/\/+$/, "");
 
   useEffect(() => {
     const fetchData = async () => {

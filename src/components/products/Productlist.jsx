@@ -84,11 +84,96 @@ const Productlist = () => {
     );
   }
 
+  // return (
+  //   <div>
+  //     <h1 className="text-slate-500 m-2 font-bold">Products</h1>
+  //     <div className="div">
+  //       <div className="searchWrapper my-5 flex items-center justify-between">
+  //         <input
+  //           type="text"
+  //           value={inputVal}
+  //           onChange={handleUserInputchange}
+  //           placeholder="Search product"
+  //         />
+  //         <Link to={"/products/add-new"}>
+  //           <Button className="mr-2 flex items-center">
+  //             <HiPlusCircle className="w-5 h-5 mr-3" />
+  //             <span>Add new product</span>
+  //           </Button>
+  //         </Link>
+  //       </div>
+  //       <div className="productsTable">
+  //         <table className="table-auto w-full text-center">
+  //           <thead className="bg-slate-300">
+  //             <tr>
+  //               <th className="py-3">ID</th>
+  //               <th>Name</th>
+  //               <th>Price</th>
+  //               <th>Image</th>
+  //               <th>Category</th>
+  //               <th>Actions</th>
+  //             </tr>
+  //           </thead>
+  //           <tbody>
+  //             {products &&
+  //               products.map((product) => {
+  //                 return (
+  //                   <tr
+  //                     key={product._id}
+  //                     className="border-b border-slate-300 text-slate-500 hover:bg-slate-100"
+  //                   >
+  //                     <td className="py-3">{product._id}</td>
+  //                     <td>{product.name}</td>
+  //                     <td>
+  //                       {new Intl.NumberFormat("vi-VN", {
+  //                         style: "currency",
+  //                         currency: "VND",
+  //                       }).format(product.price)}
+  //                     </td>
+  //                     <td>
+  //                       <img
+  //                         src={product.images[0]}
+  //                         alt={product.name}
+  //                         className="w-12 h-12 m-2"
+  //                       />
+  //                     </td>
+  //                     <td>{product.category}</td>
+  //                     <td>
+  //                       <ButtonGroup>
+  //                         <Link to={`${product._id}?mode=edit`}>
+  //                           <Button color="warning">Edit</Button>
+  //                         </Link>
+  //                         <Button
+  //                           onClick={() => handleDeleteProduct(product._id)}
+  //                           color="failure"
+  //                         >
+  //                           Delete
+  //                         </Button>
+  //                       </ButtonGroup>
+  //                     </td>
+  //                   </tr>
+  //                 );
+  //               })}
+  //           </tbody>
+  //         </table>
+  //       </div>
+  //     </div>
+  //   </div>
+  // );
   return (
     <div>
-      <h1 className="text-slate-500 m-2 font-bold">Products</h1>
-      <div className="div">
-        <div className="searchWrapper my-5 flex items-center justify-between">
+      <h1 style={{ color: "#64748b", margin: "0.5rem", fontWeight: "bold" }}>
+        Products
+      </h1>
+      <div>
+        <div
+          style={{
+            margin: "1.25rem 0",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
           <input
             type="text"
             value={inputVal}
@@ -96,17 +181,32 @@ const Productlist = () => {
             placeholder="Search product"
           />
           <Link to={"/products/add-new"}>
-            <Button className="mr-2 flex items-center">
-              <HiPlusCircle className="w-5 h-5 mr-3" />
+            <Button
+              style={{
+                marginRight: "0.5rem",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <HiPlusCircle
+                style={{
+                  width: "1.25rem",
+                  height: "1.25rem",
+                  marginRight: "0.75rem",
+                }}
+              />
               <span>Add new product</span>
             </Button>
           </Link>
         </div>
-        <div className="productsTable">
-          <table className="table-auto w-full text-center">
-            <thead className="bg-slate-300">
+
+        <div>
+          <table
+            style={{ width: "100%", textAlign: "center", tableLayout: "auto" }}
+          >
+            <thead style={{ backgroundColor: "#cbd5e1" }}>
               <tr>
-                <th className="py-3">ID</th>
+                <th style={{ padding: "0.75rem 0" }}>ID</th>
                 <th>Name</th>
                 <th>Price</th>
                 <th>Image</th>
@@ -120,9 +220,19 @@ const Productlist = () => {
                   return (
                     <tr
                       key={product._id}
-                      className="border-b border-slate-300 text-slate-500 hover:bg-slate-100"
+                      style={{
+                        borderBottom: "1px solid #cbd5e1",
+                        color: "#64748b",
+                        cursor: "pointer",
+                      }}
+                      onMouseOver={(e) =>
+                        (e.currentTarget.style.backgroundColor = "#f1f5f9")
+                      }
+                      onMouseOut={(e) =>
+                        (e.currentTarget.style.backgroundColor = "transparent")
+                      }
                     >
-                      <td className="py-3">{product._id}</td>
+                      <td style={{ padding: "0.75rem 0" }}>{product._id}</td>
                       <td>{product.name}</td>
                       <td>
                         {new Intl.NumberFormat("vi-VN", {
@@ -134,7 +244,11 @@ const Productlist = () => {
                         <img
                           src={product.images[0]}
                           alt={product.name}
-                          className="w-12 h-12 m-2"
+                          style={{
+                            width: "3rem",
+                            height: "3rem",
+                            margin: "0.5rem",
+                          }}
                         />
                       </td>
                       <td>{product.category}</td>

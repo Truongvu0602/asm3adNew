@@ -65,26 +65,48 @@ const Root = () => {
   }, []);
 
   return (
-    <div className="relative font-poppins">
+    <div style={{ position: "relative", fontFamily: "Poppins, sans-serif" }}>
       {isLoggedIn && <Header />}
+
       <div
-        className={`${
+        style={
           isLoggedIn
-            ? "container mx-auto px-4 grid grid-cols-12 mt-20 relative"
-            : ""
-        }}`}
+            ? {
+                maxWidth: "1280px",
+                margin: "5rem auto 0 auto", // mt-20
+                padding: "0 1rem", // px-4
+                display: "grid",
+                gridTemplateColumns: "repeat(12, 1fr)",
+                position: "relative",
+              }
+            : {}
+        }
       >
         {isLoggedIn && (
-          <div className="col-span-2 fixed">
+          <div
+            style={{
+              gridColumn: "span 2",
+              position: "fixed",
+            }}
+          >
             <Sidebar />
           </div>
         )}
+
         <div
-          className={`${
+          style={
             isLoggedIn
-              ? "col-start-3 col-span-10 my-5 py-5 rounded-md shadow-md h-fit"
-              : ""
-          }`}
+              ? {
+                  gridColumnStart: 3,
+                  gridColumnEnd: 13,
+                  margin: "1.25rem 0", // my-5
+                  padding: "1.25rem 0", // py-5
+                  borderRadius: "0.375rem", // rounded-md
+                  boxShadow: "0 4px 6px rgba(0,0,0,0.1)", // shadow-md
+                  height: "fit-content",
+                }
+              : {}
+          }
         >
           <Outlet />
         </div>

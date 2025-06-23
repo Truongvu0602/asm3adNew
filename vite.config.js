@@ -14,6 +14,7 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
+  base: "./", // 👈 Cần thêm dòng này khi deploy file tĩnh
   build: {
     outDir: "dist", // default rồi, chỉ để rõ ràng
   },
@@ -26,7 +27,9 @@ export default defineConfig({
       credentials: true, // Cho phép gửi cookie cross-origin
     },
     watch: {
-      ignored: ["!**/src/**"], // Chỉ theo dõi thư mục /src
+      // ignored: ["!**/src/**", "**/DumpStack.log.tmp"], // Chỉ theo dõi thư mục /src
+      ignored: ["**/DumpStack.log.tmp", "**/**.tmp"],
+      usePolling: true, // Cho Windows
     },
   },
 });
