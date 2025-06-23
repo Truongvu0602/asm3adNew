@@ -8,12 +8,12 @@ const InfoBoard = () => {
   const [infoValues, setInfoValues] = useState({});
 
   // const serverHost = import.meta.env.VITE_SERVER_HOST;
-const serverHost = import.meta.env.VITE_SERVER_HOST?.replace(/\/+$/, "");
+  const SERVER_HOST = import.meta.env.VITE_SERVER_HOST?.replace(/\/+$/, "");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${serverHost}admin/info`, {
+        const response = await axios.get(`${SERVER_HOST}admin/info`, {
           withCredentials: true,
         });
         if (response.status === 200) {
@@ -21,7 +21,7 @@ const serverHost = import.meta.env.VITE_SERVER_HOST?.replace(/\/+$/, "");
           setInfoValues(data);
         }
       } catch (error) {
-        if(error.response && error.response.status === 401) {
+        if (error.response && error.response.status === 401) {
           window.location.reload();
         }
         if (error.response.data.message) {
@@ -37,9 +37,21 @@ const serverHost = import.meta.env.VITE_SERVER_HOST?.replace(/\/+$/, "");
 
   return (
     <div className="grid grid-cols-3 gap-0 mt-5">
-      <InfoItem value={infoValues.totalUsers} desc="Clients" icon={<HiUserPlus />} />
-      <InfoItem value={infoValues.totalEarned} desc="Earnings of Month" icon={<HiCurrencyDollar />} />
-      <InfoItem value={infoValues.totalOrders} desc="Orders" icon={<HiMiniFolderPlus />} />
+      <InfoItem
+        value={infoValues.totalUsers}
+        desc="Clients"
+        icon={<HiUserPlus />}
+      />
+      <InfoItem
+        value={infoValues.totalEarned}
+        desc="Earnings of Month"
+        icon={<HiCurrencyDollar />}
+      />
+      <InfoItem
+        value={infoValues.totalOrders}
+        desc="Orders"
+        icon={<HiMiniFolderPlus />}
+      />
     </div>
   );
 };

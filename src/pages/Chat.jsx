@@ -5,7 +5,7 @@ import socketIO from "socket.io-client";
 import { Button, Spinner, TextInput } from "flowbite-react";
 import { BiPaperPlane } from "react-icons/bi";
 
-const SERVER_HOST = import.meta.env.VITE_SERVER_HOST;
+const SERVER_HOST = import.meta.env.VITE_SERVER_HOST?.replace(/\/+$/, "");
 
 let socket;
 if (!socket) {

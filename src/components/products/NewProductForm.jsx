@@ -41,7 +41,7 @@ const NewProductForm = () => {
     });
   };
 
-  const SERVER_HOST = import.meta.env.VITE_SERVER_HOST;
+  const SERVER_HOST = import.meta.env.VITE_SERVER_HOST?.replace(/\/+$/, "");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {

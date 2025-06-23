@@ -8,7 +8,7 @@ const OrderDetail = () => {
   const params = useParams();
   const orderId = params.id;
 
-  const SERVER_HOST = import.meta.env.VITE_SERVER_HOST;
+  const SERVER_HOST = import.meta.env.VITE_SERVER_HOST?.replace(/\/+$/, "");
 
   useEffect(() => {
     const fetchOrder = async () => {

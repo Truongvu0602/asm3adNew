@@ -33,7 +33,7 @@ const ProductDetail = ({ product }) => {
     });
   };
 
-  const SERVER_HOST = import.meta.env.VITE_SERVER_HOST;
+  const SERVER_HOST = import.meta.env.VITE_SERVER_HOST?.replace(/\/+$/, "");
   const navigate = useNavigate();
 
   const handleUpdateProduct = async (e) => {

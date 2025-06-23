@@ -8,7 +8,7 @@ const Header = () => {
 
   // const navigate = useNavigate();
 
-  const SERVER_HOST = import.meta.env.VITE_SERVER_HOST;
+  const SERVER_HOST = import.meta.env.VITE_SERVER_HOST?.replace(/\/+$/, "");
 
   const logOutHandler = async () => {
     try {

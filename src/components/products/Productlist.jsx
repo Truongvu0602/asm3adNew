@@ -10,7 +10,7 @@ const Productlist = () => {
   const [inputVal, setInputVal] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const serverHost = import.meta.env.VITE_SERVER_HOST;
+  const serverHost = import.meta.env.VITE_SERVER_HOST?.replace(/\/+$/, "");
 
   useEffect(() => {
     const fetchProducts = async () => {

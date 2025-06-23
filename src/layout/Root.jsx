@@ -10,7 +10,7 @@ const Root = () => {
 
   const navigate = useNavigate();
 
-  const SERVER_HOST = import.meta.env.VITE_SERVER_HOST;
+  const SERVER_HOST = import.meta.env.VITE_SERVER_HOST?.replace(/\/+$/, "");
 
   // Re-check authentication everytime the app is rendered
   // useEffect(() => {
