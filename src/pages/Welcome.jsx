@@ -11,8 +11,8 @@ const Welcome = () => {
     // </div>
     <div
       style={{
-        minHeight: "100vh",
-        minWidth: "100vw",
+        minHeight: "60vh",
+        minWidth: "50vw",
         backgroundColor: "#3f3f46", // Tailwind bg-zinc-700
         display: "flex",
         flexDirection: "column",
